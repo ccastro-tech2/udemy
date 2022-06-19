@@ -29,6 +29,8 @@ text....
 ## Criando Containers
 Obs.: Containers são baseados em images
 docker run --name exemplo1 -d -t ubuntu
+docker unpause exemplo1
+docker cp exemplo6:/tmp/ .
 Os parâmetros mais utilizados na execução do container são:
 
 Parâmetro	Explicação
@@ -71,27 +73,42 @@ docker stop exemplo2.0 exemplo2.1
 docker start exemplo3
 ```
 
-For production environments...
-
+## DockerFiles
 ```sh
-npm install --production
-NODE_ENV=production node app
+FROM nginx
+RUN sed -i 's/Welcome to nginx!/Bem vindo ao Exemplo 5 <br>via Dockerfile/g' /usr/share/nginx/html/index.html
 ```
+```sh
+docker build -t nginx_exemplo_5:v1 .
+```
+```sh
+FROM nginx
+RUN sed -i 's/Welcome to nginx!/Bem vindo ao Exemplo 5 <br>via Dockerfile/g' /usr/share/nginx/html/index.html
+RUN ls '/tmp'
+```
+```sh
+docker build -t nginx_exemplo_5:v2 .
+```
+Obs
+> Com o build criado pode reutilizar a imagem ultilizada modificando o nome no FROM
+
+
 ## IMAGES
 ```sh
 docker images
 docker pull ubuntu:14.04
 docker run --name exemplo3 -d -t -p80:80 nginx 1º80 é a local, 2º 80 port container
 docker exec exemplo2 kill -9 19
-docker stop exemplo2.0 exemplo2.1
-
-docker start exemplo3
 ```
 
-## Plugins
+## IMAGES RM
 
-Dillinger is currently extended with the following plugins.
-Instructions on how to use them in your own application are linked below.
+```sh
+docker rm container_id
+docker rmi name -force
+docker run --name exemplo3 -d -t -p80:80 nginx 1º80 é a local, 2º 80 port container
+docker exec exemplo2 kill -9 19
+```
 
 | Plugin | README |
 | ------ | ------ |
