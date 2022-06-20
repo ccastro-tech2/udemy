@@ -16,9 +16,29 @@
 - Docker info
 - Listando Containers ativos -> docker ps
 - Listando todos os Containers inclusive as paradas -> docker ps -a
+- docker images 
+- docker pull ubuntu:10.04
+- docker search wordpress
 
-Markdown is a lightweight markup language based on the formatting conventions
-that people naturally use in email.
+## Inspecionando Imagens
+- docker inspect
+- docker inspect --format '{{.id}}' CONTAINER_ID
+- docker inspect --format '{{.NetworkSettingsIPAddress}}' CONTAINER_ID
+- docker diff CONTAINER_ID
+- docker logs CONTAINER_ID
+
+## Exportando imagem en .tar
+```sh
+docker export -o /tmp/container_$NAME_$TAG.tar CONTAINER_ID
+```
+
+## importando imagem en .tar
+```sh
+cat /tmp/container_$NAME_$TAG.tar | docker import - $aula-ex01:v1
+```
+```sh
+docker run -dt --name aula-ex01-b aula-ex01:v1 /bin/bash
+```
 As [John Gruber] writes on the [Markdown site][df1]
 
 > The overriding design goal for Markdown's
@@ -53,7 +73,7 @@ Parâmetro	Explicação
 - [/bin/bash] - fast node.js network app framework [@tjholowaychuk]
 - [Gulp] - the streaming build system
 - [Breakdance](https://breakdance.github.io/breakdance/) - HTML
-to Markdown converter
+- to Markdown converter
 - [jQuery] - duh
 
 And of course Dillinger itself is open source with a [public repository][dill]
@@ -69,7 +89,6 @@ Install the dependencies and devDependencies and start the server.
 docker exec exemplo1 ps ax
 docker exec exemplo2 kill -9 19
 docker stop exemplo2.0 exemplo2.1
-
 docker start exemplo3
 ```
 
@@ -108,6 +127,28 @@ docker rm container_id
 docker rmi name -force
 docker run --name exemplo3 -d -t -p80:80 nginx 1º80 é a local, 2º 80 port container
 docker exec exemplo2 kill -9 19
+```
+## Docker Ports
+- [multi ports] 
+
+```sh
+docker run -dt --name exemplo01 -p 54-55:54-55/udp -p 192.168.0.110:100:101/tcp -p 86-89:91-99 ubuntu /bin/bash
+```
+## Volume -v
+| exec | README |
+| ------ | ------ |
+| :ro | Read-only |
+| aula_21 | RedMine + mysql + link + Containers + deploy |
+| exec3 | [plugins/googledrive/README.md][PlGd] |
+| exec4 | [plugins/onedrive/README.md][PlOd] |
+| exec5 | [plugins/medium/README.md][PlMe] |
+| exec5  | [plugins/googleanalytics/README.md][PlGa] |
+```sh
+docker run -dt --name exemplo02 -P nginx-emeplo02:v3 /bin/bash
+```
+
+```sh
+docker run -dt --name exemplo02 -P nginx-emeplo02:v3 -v /Desktop/docker/volume:/tmp/docker/volumes /bin/bash
 ```
 
 | Plugin | README |
