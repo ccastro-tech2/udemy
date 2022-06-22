@@ -1,7 +1,7 @@
 # Docker 
 ## Read Me - Daily 
 
-[![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://nodesource.com/products/nsolid)
+[![M|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://nodesource.com/products/nsolid)
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
@@ -19,6 +19,9 @@
 - docker images 
 - docker pull ubuntu:10.04
 - docker search wordpress
+- docker commit -m "update imagem" name_image ccastro-tech/name_image:v2
+- docker push name_image
+- docker pull name_image:v2
 
 ## Inspecionando Imagens
 - docker inspect
@@ -34,11 +37,17 @@ docker export -o /tmp/container_$NAME_$TAG.tar CONTAINER_ID
 
 ## importando imagem en .tar
 ```sh
+docker load < /tmp/container_$NAME_$TAG.tar
+```
+#### plano B
+
+```sh
 cat /tmp/container_$NAME_$TAG.tar | docker import - $aula-ex01:v1
 ```
 ```sh
 docker run -dt --name aula-ex01-b aula-ex01:v1 /bin/bash
 ```
+
 As [John Gruber] writes on the [Markdown site][df1]
 
 > The overriding design goal for Markdown's
